@@ -4,10 +4,8 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
+mongoose.connect(process.env.MONGO
+).then(() => {
     console.log('Connected to Mongoose')
 }
 ).catch((err) => console.log(err))
