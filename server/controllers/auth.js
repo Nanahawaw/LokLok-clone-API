@@ -9,6 +9,7 @@ export const registerUser = async (req, res) => {
         const newUser = new User({
             email: req.body.email,
             password: await bcrypt.hash(req.body.password, 10),
+            otpSecret: secret
 
         })
         const user = await newUser.save();
@@ -19,8 +20,7 @@ export const registerUser = async (req, res) => {
             `
         }
         await sendEmail(emailOptions)
-        return res.status(200).json({ user, otp })
-
+        return res.status(200).json({ user: { email: user.email }, otp });
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: error.message })
