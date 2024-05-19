@@ -12,9 +12,10 @@ mongoose.connect(process.env.MONGO
 ).catch((err) => console.log(err))
 
 const app = express();
-
-
 app.use(express.json());
+app.use(cors())
+
+//routes
 app.use('/api/auth', authRouter)
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
