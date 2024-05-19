@@ -38,6 +38,12 @@ export const loginUser = async (req, res) => {
         if (!isPassWordMatched) {
             return res.status(401).json({ message: 'Invalid email or password' })
         }
+        const token = jwt.sign({ id: findUser._id, isAdmin: findUser.isAdmin }, process.env.JWT_SECRET)
+        //store token in cookies
+        res.cookies({
+            'accessToken': token,
+            httpOnly: true
+        })
         return res.status(200).json({ message: 'Login successfull', findUser })
     } catch (error) {
         console.log(error)
