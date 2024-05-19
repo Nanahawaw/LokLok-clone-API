@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
 import { sendEmail } from "../utils/sendEmail.js";
+import { generateOtp } from "../utils/otpGenerator.js";
 
 export const registerUser = async (req, res) => {
     try {
@@ -11,17 +12,18 @@ export const registerUser = async (req, res) => {
         })
         const user = await newUser.save();
         //verify email by sending otp
-        const otp = 
+        const otp = generateOtp();
         const emailOptions = {
-            to: user.email
+            to: user.email,
             subject: `To verify your account , please enter the following verification code on LOKLOK: ${otp}. The veriication code expires in 1 hour. if you do not request the code please ignore this message
             `
         }
-
-
+        await sendEmail(emailOptions)
+        return res.status(200).json({ user, otp })
 
     } catch (error) {
-
+        console.log(error)
+        return res.status(500).json({ message: error.message })
     }
 }
 
