@@ -10,7 +10,9 @@
     "mongoose": "^8.3.5",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0",
-    "speakeasy": "^2.0.0"
+    "speakeasy": "^2.0.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0"
   },
   "name": "loklok-clone-api",
   "version": "1.0.0",
@@ -18,7 +20,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "node swagger.js",
     "dev": "nodemon index.js"
   },
   "author": "Nans",
