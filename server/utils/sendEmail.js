@@ -19,12 +19,28 @@ const MailGenerator = new Mailgen({
 })
 
 export const sendEmail = async (options) => {
+    const emailBody = {
+        body: {
+            name: options.name,
+            intro: options.intro,
+            action: {
+                instructions: options.instructions,
+                button: {
+                    color: '#22BC66', // Optional action button color
+                    text: options.buttonText,
+                    link: options.link
+                }
+            },
+            outro: options.outro
+        }
+    };
+    const emailContent = MailGenerator.generate(emailBody);
 
     const mailOptions = {
         from: process.env.EMAIL,
         to: options.email,
         subject: options.subject,
-        html: MailGenerator.generate(options)
+        html: emailContent
     }
     try {
         await transporter.sendMail(mailOptions)

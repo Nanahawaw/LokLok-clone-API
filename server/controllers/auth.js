@@ -5,6 +5,10 @@ import { generateOtp } from "../utils/otpGenerator.js";
 import jwt from 'jsonwebtoken';
 
 export const registerUser = async (req, res) => {
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser) {
+        return res.status(400).json({ message: 'Email already exists' });
+    }
     try {
         const { otp, secret } = generateOtp()
         const newUser = new User({
@@ -17,10 +21,16 @@ export const registerUser = async (req, res) => {
         //verify email by sending otp
         const emailOptions = {
             to: user.email,
-            subject: `To verify your account , please enter the following verification code on LOKLOK: ${otp}. The veriication code expires in 1 hour. if you do not request the code please ignore this message
-            `
-        }
-        await sendEmail(emailOptions)
+            subject: 'Verify your account',
+            name: user.email,
+            intro: `To verify your account, please enter the following verification code on LokLok: ${otp}.`,
+            instructions: 'Please enter this code on the verification page:',
+            buttonText: 'Verify Account',
+            link: 'http://loklok.com/verify', // Replace with your verification link
+            outro: 'The verification code expires in 1 hour. If you did not request the code, please ignore this message.'
+        };
+
+        await sendEmail(emailOptions);
         return res.status(200).json({ user: { email: user.email }, otp });
     } catch (error) {
         console.log(error)
