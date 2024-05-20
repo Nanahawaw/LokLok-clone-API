@@ -21,7 +21,6 @@ const MailGenerator = new Mailgen({
 export const sendEmail = async (options) => {
     const emailBody = {
         body: {
-            name: options.name,
             intro: options.intro,
             action: {
                 instructions: options.instructions,

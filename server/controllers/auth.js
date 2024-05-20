@@ -22,11 +22,10 @@ export const registerUser = async (req, res) => {
         const emailOptions = {
             to: user.email,
             subject: 'Verify your account',
-            name: user.email,
             intro: `To verify your account, please enter the following verification code on LokLok: ${otp}.`,
             instructions: 'Please enter this code on the verification page:',
             buttonText: 'Verify Account',
-            link: 'http://loklok.com/verify', // Replace with your verification link
+            link: 'https://loklok-clone-api.onrender.com/api/auth/verify-email', // Replace with your verification link
             outro: 'The verification code expires in 1 hour. If you did not request the code, please ignore this message.'
         };
 
