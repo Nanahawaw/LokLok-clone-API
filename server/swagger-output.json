@@ -7,11 +7,9 @@
   },
   "host": "https://loklok-clone-api.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
-    "/register": {
+    "/api/auth/register": {
       "post": {
         "description": "",
         "parameters": [
@@ -44,7 +42,7 @@
         }
       }
     },
-    "/verify-email": {
+    "/api/auth/verify-email": {
       "post": {
         "description": "",
         "parameters": [
@@ -80,7 +78,7 @@
         }
       }
     },
-    "/login": {
+    "/api/auth/login": {
       "post": {
         "description": "",
         "parameters": [
