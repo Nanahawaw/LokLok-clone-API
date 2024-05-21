@@ -78,7 +78,7 @@
         }
       }
     },
-    "/api/auth/login": {
+    "/login": {
       "post": {
         "description": "",
         "parameters": [
