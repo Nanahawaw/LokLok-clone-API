@@ -13,8 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    
+
     - name: Generate Swagger documentation
-      run: node swagger.js
+      run: node ./server/swagger.js
        
 
     - name: Deploy to GitHub Pages
