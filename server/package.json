@@ -20,8 +20,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node swagger.js",
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "generate-swagger": "node swagger.js"
   },
   "author": "Nans",
   "license": "ISC",

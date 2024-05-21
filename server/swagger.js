@@ -12,6 +12,10 @@ const doc = {
 const outputFile = './swagger-output.json';
 const endpointsFiles = ['./routes/*.js']; // Adjust the path to your route files
 
-swaggerAutogen()(outputFile, endpointsFiles, doc).then(() => {
-    import('./index.js'); // Your project's main file
-});
+swaggerAutogen()(outputFile, endpointsFiles, doc)
+    .then(() => {
+        console.log('Swagger documentation generated successfully');
+    })
+    .catch((err) => {
+        console.error('Error generating Swagger documentation:', err);
+    });
