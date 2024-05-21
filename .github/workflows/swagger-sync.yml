@@ -20,12 +20,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./server  # Specify the directory if your package.json is not at the root
 
       - name: List current directory
-        run: ls -la  # Debug step to list the contents of the current directory
+        run: ls -la ./server  # Adjust the path as necessary to ensure it points to the right directory
 
       - name: Generate Swagger documentation
         run: node ./server/swagger.js
+        working-directory: ./server  # Specify the directory if needed
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
