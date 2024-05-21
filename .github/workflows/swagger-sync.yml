@@ -22,7 +22,7 @@ jobs:
       run: ls -la  # Debug step to list the contents of the current directory
 
     - name: Generate Swagger documentation
-      run: node ./server/swagger.js  # Updated file path to include the 'server' directory
+      run:  node /home/runner/work/LokLok-clone-API/LokLok-clone-API/server/swagger.js
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
