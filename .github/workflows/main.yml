@@ -28,9 +28,10 @@ jobs:
           MONGODB: ${{ secrets.MONGODB}}  # Use the secret for MongoDB URI
       
 
+    
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        branch: gh-pages # The branch to deploy to
-        folder: server # The folder to deploy
-        single-commit: true # Commit as a single commit
+        token: ${{ secrets.DEPLOY_TOKEN }}
+        branch: gh-pages
+        folder: dist
