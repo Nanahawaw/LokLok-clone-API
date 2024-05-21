@@ -34,4 +34,4 @@ jobs:
       with:
         token: ${{ secrets.DEPLOY_TOKEN }}
         branch: gh-pages
-        folder: dist
+        folder: server
