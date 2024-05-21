@@ -1,0 +1,24 @@
+name: Sync API Documentation
+
+on:
+  push:
+    branches:
+      - main # Replace with your desired branch
+
+jobs:
+
+  sync-documentation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Generate Swagger documentation
+      run: node swagger.js
+       
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages # The branch to deploy to
+        folder: server # The folder containing the Swagger UI files
