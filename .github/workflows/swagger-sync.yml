@@ -29,7 +29,7 @@ jobs:
         run: ls -la ./server  # List contents of the server directory for debugging
 
       - name: Generate Swagger documentation
-        run: node ./server/swagger.js
+        run: node swagger.js
         working-directory: ./server  # Specify the directory if needed
 
       - name: Deploy to GitHub Pages
