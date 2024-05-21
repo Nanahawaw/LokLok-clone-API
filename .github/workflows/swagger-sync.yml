@@ -3,24 +3,29 @@ name: Sync API Documentation
 on:
   push:
     branches:
-      - main # Replace with your desired branch
+      - main  # Replace with your desired branch
 
 jobs:
-
   sync-documentation:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'  # Update to the desired Node.js version
+
+    - name: List current directory
+      run: ls -la  # Debug step to list the contents of the current directory
 
     - name: Generate Swagger documentation
-      run: node ./server/swagger.js
-       
+      run: node ./server/swagger.js  # Updated file path to include the 'server' directory
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        branch: gh-pages # The branch to deploy to
-        folder: server # The folder containing the Swagger UI files
+        branch: gh-pages  # The branch to deploy to
+        folder: server  # The folder containing the Swagger UI files
