@@ -31,6 +31,8 @@ jobs:
       - name: Generate Swagger documentation
         run: node swagger.js
         working-directory: ./server  # Specify the directory if needed
+        env:
+          MONGO: ${{ secrets.MONGO }}  # Use the secret for MongoDB URI
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
