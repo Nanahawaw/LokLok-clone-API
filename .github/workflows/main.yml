@@ -33,7 +33,7 @@ jobs:
           cp ./server/node_modules/swagger-ui-dist/swagger-ui.css ./server/swagger-ui.css
           cp ./server/node_modules/swagger-ui-dist/swagger-ui-bundle.js ./server/swagger-ui-bundle.js
           cp ./server/node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js ./server/swagger-ui-standalone-preset.js
-          cp ./server/swagger-output.json ./server/swagger-output.json
+          cp ./server/swagger-output.json
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
