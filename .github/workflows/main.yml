@@ -2,7 +2,7 @@ name: Deploy Swagger UI
 
 on:
   push:
-    branches: -main
+    branches: - main
 
 jobs:
   build:
