@@ -12,6 +12,7 @@
     "nodemon": "^3.1.0",
     "speakeasy": "^2.0.0",
     "swagger-autogen": "^2.23.7",
+    "swagger-ui-dist": "^5.17.12",
     "swagger-ui-express": "^5.0.0"
   },
   "name": "loklok-clone-api",
