@@ -5,10 +5,11 @@
     "description": "API documentation",
     "version": "1.0.0"
   },
-  "host": "https://loklok-clone-api.onrender.com",
+  "host": "localhost:8000",
   "basePath": "/api",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
     "/auth/register": {
