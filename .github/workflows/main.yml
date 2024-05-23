@@ -1,37 +1,39 @@
 name: Deploy Swagger UI
 
-on:
-  push:
-    branches:
-      - main # Replace with your main branch name
+on: 
+  push: 
+    branches: 
+      -main
 
-jobs:
-  deploy:
+jobs: 
+  build: 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
       with:
         node-version: '20'
-
+      
     - name: Install dependencies
       run: npm install
-      working-directory: ./server  # Specify the directory if your package.json is not at the root
+      working-directory: ./server
 
     - name: Generate Swagger documentation
-      run: npm run generate-swagger
-      working-directory: ./server  # Specify the directory if needed
-      env:
-          MONGODB: ${{ secrets.MONGODB}}  # Use the secret for MongoDB URI
-      
+      run: run generate-swagger
 
-    
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        token: ${{ secrets.DEPLOY_TOKEN }}
-        branch: gh-pages
-        folder: server
+    - name: Copy Swagger UI assets
+      run: |
+         cp ./server/node_modules/swagger-ui-dist/swagger-ui.css ./
+        cp ./server/node_modules/swagger-ui-dist/swagger-ui-bundle.js ./
+        cp ./server/node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js ./
+        cp ./server/swagger-output.json ./
+     
+    - name: Deploy to Github Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with: 
+       github_token: ${{ secrets.DEPLOY_TOKEN }}
+       publish_dir: ./

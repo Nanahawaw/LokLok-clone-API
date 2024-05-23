@@ -5,6 +5,13 @@ import authRouter from './routes/auth.js'
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import swaggerUi from 'swagger-ui-express';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import fs from 'fs';
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 
 dotenv.config();
@@ -18,14 +25,9 @@ mongoose.connect(process.env.MONGO
 const app = express();
 
 /// Serve Swagger UI from GitHub Pages
-const swaggerUrl = 'https://Nanahawaw.github.io/LokLok-clone-API/swagger-output.json';
-app.use(
-    '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup({
-        swaggerUrl,
-    })
-);
+const swaggerDocument =
+    JSON.parse(fs.readFileSync(join(__dirname, '../server/swagger-output.json'), 'utf-8'));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json());
 app.use(cors())
 app.use(cookieParser());
