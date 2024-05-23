@@ -7,6 +7,7 @@ const doc = {
     },
     host: 'https://loklok-clone-api.onrender.com', // Replace with your Render URL
     schemes: ['http'],
+    basePath: '/api',
 };
 
 const outputFile = './swagger-output.json';

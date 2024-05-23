@@ -34,7 +34,7 @@ app.use(cookieParser());
 
 
 //routes
-app.use('/api/auth', authRouter)
+app.use('/api', authRouter)
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
 })

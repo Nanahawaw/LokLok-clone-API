@@ -5,9 +5,9 @@ import { emailIsVerified } from '../middlewares/emailIsVerified.js';
 
 const router = express.Router();
 
-router.post('/register', registerUser)
-router.post('/verify-email', verifyEmail)
-router.post('/login', emailIsVerified, loginUser)
-router.delete('/logout-user', logout)
+router.post('/auth/register', registerUser)
+router.post('/auth/verify-email', verifyEmail)
+router.post('/auth/login', emailIsVerified, loginUser)
+router.delete('/auth/logout', logout)
 
 export default router;

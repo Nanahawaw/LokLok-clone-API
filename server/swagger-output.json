@@ -6,12 +6,12 @@
     "version": "1.0.0"
   },
   "host": "https://loklok-clone-api.onrender.com",
-  "basePath": "/",
+  "basePath": "/api",
   "schemes": [
     "http"
   ],
   "paths": {
-    "/register": {
+    "/auth/register": {
       "post": {
         "description": "",
         "parameters": [
@@ -44,7 +44,7 @@
         }
       }
     },
-    "/verify-email": {
+    "/auth/verify-email": {
       "post": {
         "description": "",
         "parameters": [
@@ -80,7 +80,7 @@
         }
       }
     },
-    "/login": {
+    "/auth/login": {
       "post": {
         "description": "",
         "parameters": [
@@ -116,7 +116,7 @@
         }
       }
     },
-    "/logout-user": {
+    "/auth/logout": {
       "delete": {
         "description": "",
         "responses": {
