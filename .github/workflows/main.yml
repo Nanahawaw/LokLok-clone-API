@@ -34,7 +34,6 @@ jobs:
           cp ./server/node_modules/swagger-ui-dist/swagger-ui-bundle.js ./
           cp ./server/node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js ./
           cp ./server/swagger-output.json ./
-
         working-directory: ./server
 
       - name: Deploy to Github Pages
