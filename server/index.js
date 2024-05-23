@@ -24,12 +24,21 @@ mongoose.connect(process.env.MONGO
 
 const app = express();
 
+
+// Configure CORS
+const corsOptions = {
+    origin: ['https://nanahawaw.github.io/LokLok-clone-API/', 'http:localhost:8000/api-docs'], // Replace with your GitHub Pages URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204
+};
+
 /// Serve Swagger UI from GitHub Pages
 const swaggerDocument =
     JSON.parse(fs.readFileSync(join(__dirname, '../server/swagger-output.json'), 'utf-8'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json());
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(cookieParser());
 
 
