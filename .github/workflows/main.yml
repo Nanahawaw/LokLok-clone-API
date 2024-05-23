@@ -24,6 +24,7 @@ jobs:
 
       - name: Generate Swagger documentation
         run: npm run generate-swagger
+        working-directory: ./server
         env:
           MONGO: ${{ secrets.MONGO }}
 
@@ -34,8 +35,10 @@ jobs:
           cp ./server/node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js ./
           cp ./server/swagger-output.json ./
 
+        working-directory: ./server
+
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.DEPLOY_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./server
