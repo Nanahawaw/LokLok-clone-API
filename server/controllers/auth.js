@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import { sendEmail } from "../utils/sendEmail.js";
 import { generateOtp } from "../utils/otpGenerator.js";
 import jwt from 'jsonwebtoken';
+import speakeasy from 'speakeasy';
 
 export const registerUser = async (req, res) => {
     const existingUser = await User.findOne({ email: req.body.email });
@@ -19,8 +20,9 @@ export const registerUser = async (req, res) => {
         })
         const user = await newUser.save();
         //verify email by sending otp
+
         const emailOptions = {
-            to: user.email,
+            email: user.email,
             subject: 'Verify your account',
             intro: `To verify your account, please enter the following verification code on LokLok: ${otp}.`,
             instructions: 'Please enter this code on the verification page:',
@@ -49,7 +51,8 @@ export const verifyEmail = async (req, res) => {
         const isValid = speakeasy.totp.verify({
             secret: user.otpSecret,
             encoding: 'base32',
-            token: otp
+            token: otp,
+            window: 10
         })
         if (!isValid) {
             return res.status(400).json({ message: 'Invalid verification code' });
@@ -63,6 +66,17 @@ export const verifyEmail = async (req, res) => {
         return res.status(500).json({ message: error.message })
     }
 }
+
+export const resendVerificationCode = async (req, res) => {
+    try {
+        const { email } = req.body
+
+
+    } catch (error) {
+
+    }
+}
+
 
 export const loginUser = async (req, res) => {
     try {
