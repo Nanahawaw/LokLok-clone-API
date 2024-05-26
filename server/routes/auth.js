@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/auth/register', registerUser)
 router.post('/auth/verify-email', verifyEmail)
-router.post('/resend-verificationCode', resendVerificationCode)
+router.post('/auth/resend-verificationCode', resendVerificationCode)
 router.post('/auth/login', emailIsVerified, loginUser)
 router.delete('/auth/logout', logout)
 
