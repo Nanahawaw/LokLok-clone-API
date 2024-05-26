@@ -1,5 +1,8 @@
 import nodemailer from 'nodemailer';
 import Mailgen from 'mailgen';
+import dotenv from "dotenv"
+
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -45,7 +48,7 @@ export const sendEmail = async (options) => {
         await transporter.sendMail(mailOptions)
     } catch (error) {
         console.error('Error sending email:', error);
-        throw new Error('Failed to send email');
+
     }
 }
 
