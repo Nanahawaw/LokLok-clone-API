@@ -4,6 +4,7 @@ import { sendEmail } from "../utils/sendEmail.js";
 import { generateOtp } from "../utils/otpGenerator.js";
 import jwt from 'jsonwebtoken';
 import speakeasy from 'speakeasy';
+import { customAlphabet } from 'nanoid';
 
 export const registerUser = async (req, res) => {
     const existingUser = await User.findOne({ email: req.body.email });
@@ -57,7 +58,14 @@ export const verifyEmail = async (req, res) => {
         if (!isValid) {
             return res.status(400).json({ message: 'Invalid verification code' });
         }
+
+        //set username
+        const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 7)
+        const randomString = nanoid()
+        const username = `Reel${randomString}`
+
         user.emailIsVerified = true;
+        user.username = username;
         await user.save();
 
         return res.status(200).json({ message: 'Email verified successfully' });
@@ -70,10 +78,31 @@ export const verifyEmail = async (req, res) => {
 export const resendVerificationCode = async (req, res) => {
     try {
         const { email } = req.body
+        const { otp, secret } = generateOtp()
+        const user = await User.findOneAndUpdate({ email },
+            { otpSecret: secret },
+            { new: true }
+        )
 
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' })
+        }
+
+        const emailOptions = {
+            email: user.email,
+            subject: 'Verify your account',
+            intro: `To verify your account, please enter the following verification code on LokLok: ${otp}.`,
+            instructions: 'Please enter this code on the verification page:',
+            buttonText: 'Verify Account',
+            link: 'https://loklok-clone-api.onrender.com/api/auth/verify-email', // Replace with your verification link
+            outro: 'The verification code expires in 1 hour. If you did not request the code, please ignore this message.'
+        };
+        await sendEmail(emailOptions);
+        return res.status(200).json({ user: { email: user.email }, otp });
 
     } catch (error) {
-
+        console.log(error);
+        return res.status(500).json({ message: error.message })
     }
 }
 
@@ -85,17 +114,22 @@ export const loginUser = async (req, res) => {
         if (!findUser) {
             return res.status(404).json({ message: 'User not found' })
         }
-        const isPassWordMatched = await bcrypt.compare(findUser.password, password)
+        const isPassWordMatched = await bcrypt.compare(password, findUser.password)
         if (!isPassWordMatched) {
             return res.status(401).json({ message: 'Invalid email or password' })
         }
         const token = jwt.sign({ id: findUser._id, isAdmin: findUser.isAdmin }, process.env.JWT_SECRET)
         //store token in cookies
-        res.cookies({
+        res.cookie({
             'accessToken': token,
             httpOnly: true
         })
-        return res.status(200).json({ message: 'Login successfull', findUser })
+
+        const user = { ...findUser._doc }
+        delete user.password
+        delete user.otpSecret
+
+        return res.status(200).json({ message: 'Login successfull', user })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: error.message })
