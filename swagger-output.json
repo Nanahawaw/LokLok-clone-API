@@ -8,7 +8,6 @@
   "host": "loklok-clone-api.onrender.com",
   "basePath": "/api",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {

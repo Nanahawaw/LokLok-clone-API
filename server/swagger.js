@@ -6,7 +6,7 @@ const doc = {
         description: 'API documentation',
     },
     host: 'loklok-clone-api.onrender.com', // Replace with your Render URL
-    schemes: ['http', 'https'],
+    schemes: ['https'],
     basePath: '/api',
 };
 
