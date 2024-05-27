@@ -28,19 +28,24 @@ const app = express();
 
 
 // Configure CORS
+const allowedOrigins = [
+    'https://your-github-username.github.io',// Replace with your GitHub Pages URL
+    'http://localhost:8000'
+];
+
 const corsOptions = {
-    origin: ['http://localhost:8000', 'https://nanahawaw.github.io/LokLok-clone-API/'],
-    credentials: true,
+    origin: allowedOrigins,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
 };
 
-
+app.use(cors(corsOptions));
 /// Serve Swagger UI from GitHub Pages
 const swaggerDocument =
     JSON.parse(fs.readFileSync(join(__dirname, '../server/swagger-output.json'), 'utf-8'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json());
-app.use(cors())
 app.use(cookieParser());
 
 
