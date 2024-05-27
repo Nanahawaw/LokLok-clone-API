@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import authRouter from './routes/auth.js'
 import userRouter from './routes/user.js'
+import adminRouter from './routes/admin.js'
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import swaggerUi from 'swagger-ui-express';
@@ -46,6 +47,7 @@ app.use(cookieParser());
 //routes
 app.use('/api', authRouter)
 app.use('/api', userRouter)
+app.use('/api', adminRouter)
 app.listen(8000, () => {
     console.log('Server is running on port 8000');
 })
