@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import speakeasy from 'speakeasy';
 import { customAlphabet } from 'nanoid';
 
+
 export const registerUser = async (req, res) => {
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
@@ -120,10 +121,7 @@ export const loginUser = async (req, res) => {
         }
         const token = jwt.sign({ id: findUser._id, isAdmin: findUser.isAdmin }, process.env.JWT_SECRET)
         //store token in cookies
-        res.cookie({
-            'accessToken': token,
-            httpOnly: true
-        })
+        res.cookie('accessToken', token, { httpOnly: true })
 
         const user = { ...findUser._doc }
         delete user.password
