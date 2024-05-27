@@ -24,8 +24,7 @@
     "test": "node test.js",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "generate-swagger": "node swagger.js",
-    "copy-assets": "copyfiles node_modules/swagger-ui-dist/{swagger-ui.css,swagger-ui-bundle.js,swagger-ui-standalone-preset.js} ./swagger-output.json ./"
+    "generate-swagger": "node swagger.js"
   },
   "author": "Nans",
   "license": "ISC",
