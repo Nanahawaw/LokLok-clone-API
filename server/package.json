@@ -24,9 +24,13 @@
     "test": "node test.js",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "generate-swagger": "node swagger.js"
+    "generate-swagger": "node swagger.js",
+    "copy-assets": "copyfiles -u 1 node_modules/swagger-ui-dist/* ./"
   },
   "author": "Nans",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "copyfiles": "^2.4.1"
+  }
 }
