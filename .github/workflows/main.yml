@@ -29,11 +29,8 @@ jobs:
           MONGO: ${{ secrets.MONGO }}
 
       - name: Copy Swagger UI assets
-        run: |
-          cp ./server/node_modules/swagger-ui-dist/swagger-ui.css ./
-          cp ./server/node_modules/swagger-ui-dist/swagger-ui-bundle.js ./
-          cp ./server/node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js ./
-          cp ./server/swagger-output.json ./
+        run: npm run copy-assets
+        working-directory: ./server
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
