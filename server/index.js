@@ -40,7 +40,7 @@ const swaggerDocument =
     JSON.parse(fs.readFileSync(join(__dirname, '../server/swagger-output.json'), 'utf-8'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(express.json());
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(cookieParser());
 
 
