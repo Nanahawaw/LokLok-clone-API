@@ -29,7 +29,7 @@ const app = express();
 
 // Configure CORS
 const allowedOrigins = [
-    'https://nanahawaw.github.io/LokLok-clone-API',// Replace with your GitHub Pages URL
+    'https://nanahawaw.github.io',// Replace with your GitHub Pages URL
     'http://localhost:8000'
 ];
 
